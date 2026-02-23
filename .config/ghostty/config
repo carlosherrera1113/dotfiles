@@ -1,0 +1,40 @@
+font-size = 14
+
+# One Dark Pro color scheme
+palette = "onedark"
+
+# One Dark colors
+background = "#282c34"
+foreground = "#abb2bf"
+
+# Normal colors (0-7)
+color0 = "#282c34"
+color1 = "#e06c75"
+color2 = "#98c379"
+color3 = "#e5c07b"
+color4 = "#61afef"
+color5 = "#c678dd"
+color6 = "#56b6c2"
+color7 = "#abb2bf"
+
+# Bright colors (8-15)
+color8 = "#5c6370"
+color9 = "#e06c75"
+color10 = "#98c379"
+color11 = "#e5c07b"
+color12 = "#61afef"
+color13 = "#c678dd"
+color14 = "#56b6c2"
+color15 = "#ffffff"
+
+# Cursor
+cursor-color = "#528cff"
+cursor-text = "#282c34"
+
+# Selection
+selection-background = "#3e4451"
+selection-foreground = "#abb2bf"
+
+# Compact settings
+window-padding-x = 4
+window-padding-y = 2
