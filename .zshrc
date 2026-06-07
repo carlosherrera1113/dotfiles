@@ -10,12 +10,6 @@ alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles --work-tree=$HOME'
 # FZF fuzzy finder
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# bun completions
-[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
-
-# bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
 alias lg='lazygit'
 alias nv='nvim'
 export PATH="$HOME/.local/bin:$PATH"
