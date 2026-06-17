@@ -314,6 +314,32 @@ require('lazy').setup({
         changedelete = { text = '~' },
         untracked    = { text = '┆' },
       },
+      on_attach = function(bufnr)
+        local gitsigns = require 'gitsigns'
+
+        local function map(mode, lhs, rhs, desc)
+          vim.keymap.set(mode, lhs, rhs, { buffer = bufnr, desc = desc })
+        end
+
+        map('n', ']c', function()
+          if vim.wo.diff then
+            vim.cmd.normal { ']c', bang = true }
+          else
+            gitsigns.nav_hunk('next')
+          end
+        end, 'Next git hunk')
+
+        map('n', '[c', function()
+          if vim.wo.diff then
+            vim.cmd.normal { '[c', bang = true }
+          else
+            gitsigns.nav_hunk('prev')
+          end
+        end, 'Previous git hunk')
+
+        map('n', '<leader>hp', gitsigns.preview_hunk, 'Preview git hunk')
+        map('n', '<leader>hi', gitsigns.preview_hunk_inline, 'Preview git hunk inline')
+      end,
     },
     config = function(_, opts)
       require('gitsigns').setup(opts)
