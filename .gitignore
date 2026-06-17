@@ -1,0 +1,13 @@
+# Allowlist (deny-by-default) for the bare dotfiles repo.
+# Everything under $HOME is ignored by default so an accidental
+# `dotfiles add .` / `dotfiles add -A` stages nothing.
+#
+# To start tracking a new file, force past this ignore:
+#     dotfiles add -f <path>
+#
+# Note: `add -f` overrides this file, so a typo'd force-add can still
+# stage a secret. This guards bulk adds, not explicit force-adds.
+*
+
+# Keep this allowlist itself visible/tracked.
+!.gitignore
