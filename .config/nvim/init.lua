@@ -222,6 +222,27 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
+local function apply_gitsigns_marker_highlights()
+  local highlights = {
+    GitSignsAdd = '#7ee787',
+    GitSignsChange = '#ffd866',
+    GitSignsDelete = '#ff6b6b',
+    GitSignsChangedelete = '#ffd866',
+    GitSignsTopdelete = '#ff6b6b',
+    GitSignsUntracked = '#7ee787',
+    GitSignsStagedAdd = '#7ee787',
+    GitSignsStagedChange = '#ffd866',
+    GitSignsStagedDelete = '#ff6b6b',
+    GitSignsStagedChangedelete = '#ffd866',
+    GitSignsStagedTopdelete = '#ff6b6b',
+    GitSignsStagedUntracked = '#7ee787',
+  }
+
+  for group, fg in pairs(highlights) do
+    vim.api.nvim_set_hl(0, group, { fg = fg, bold = true })
+  end
+end
+
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
@@ -285,6 +306,17 @@ require('lazy').setup({
         changedelete = { text = '~' },
       },
     },
+    config = function(_, opts)
+      require('gitsigns').setup(opts)
+      apply_gitsigns_marker_highlights()
+
+      vim.api.nvim_create_autocmd('ColorScheme', {
+        group = vim.api.nvim_create_augroup('kickstart-gitsigns-highlights', { clear = true }),
+        callback = function()
+          vim.schedule(apply_gitsigns_marker_highlights)
+        end,
+      })
+    end,
   },
 
   -- NOTE: Plugins can also be configured to run Lua code when they are loaded.
