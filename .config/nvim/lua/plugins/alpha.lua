@@ -130,9 +130,11 @@ return {
 			{ "AlphaHeader7_2", 38, 45 },
 			{ "AlphaHeader7_3", 46, 90 },
 		})
-		table.insert(header_hl, { -- Line 18
-			{ "AlphaHeader8_0", 1, 37 },
-			{ "AlphaHeader8_1", 37, 91 },
+		table.insert(header_hl, { -- Line 18 (drop shadow: one per letter group)
+			{ "AlphaHeader8_0", 1, 17 },  -- N shadow
+			{ "AlphaHeader8_1", 17, 38 }, -- eo shadow
+			{ "AlphaHeader8_2", 38, 45 }, -- V shadow
+			{ "AlphaHeader8_3", 45, 91 }, -- imm shadow
 		})
 
 		-- One Dark Atom Pro recolor: "Neo" = blue->cyan, "Vim" = teal->aqua.
@@ -146,7 +148,7 @@ return {
 		vim.api.nvim_set_hl(0, "AlphaHeader2_0", { fg = "#336daf" }) -- N   (blue)
 		vim.api.nvim_set_hl(0, "AlphaHeader2_1", { fg = "#357364" }) -- V   (teal)
 		vim.api.nvim_set_hl(0, "AlphaHeader3_0", { fg = "#3f7cbb" }) -- N   (blue)
-		vim.api.nvim_set_hl(0, "AlphaHeader3_1", { fg = "#233a52" }) -- shadow (navy)
+		vim.api.nvim_set_hl(0, "AlphaHeader3_1", { fg = "#1f4d56" }) -- eo inner shadow (dark cyan)
 		vim.api.nvim_set_hl(0, "AlphaHeader3_2", { fg = "#5fbecb" }) -- eo  (cyan)
 		vim.api.nvim_set_hl(0, "AlphaHeader3_3", { fg = "#3f8471" }) -- V   (teal)
 		vim.api.nvim_set_hl(0, "AlphaHeader3_4", { fg = "#84ceb8" }) -- imm (aqua)
@@ -156,7 +158,7 @@ return {
 		vim.api.nvim_set_hl(0, "AlphaHeader4_3", { fg = "#90d4c0" }) -- imm (aqua)
 		vim.api.nvim_set_hl(0, "AlphaHeader5_0", { fg = "#569ad5" }) -- N   (blue)
 		vim.api.nvim_set_hl(0, "AlphaHeader5_1", { fg = "#72cad5" }) -- eo  (cyan)
-		vim.api.nvim_set_hl(0, "AlphaHeader5_2", { fg = "#233a52" }) -- shadow (navy)
+		vim.api.nvim_set_hl(0, "AlphaHeader5_2", { fg = "#1f4d56" }) -- eo inner shadow (dark cyan)
 		vim.api.nvim_set_hl(0, "AlphaHeader5_3", { fg = "#72cad5" }) -- eo  (cyan)
 		vim.api.nvim_set_hl(0, "AlphaHeader5_4", { fg = "#54a48d" }) -- V   (teal)
 		vim.api.nvim_set_hl(0, "AlphaHeader5_5", { fg = "#9cd9c7" }) -- imm (aqua)
@@ -168,8 +170,15 @@ return {
 		vim.api.nvim_set_hl(0, "AlphaHeader7_1", { fg = "#84d6df" }) -- eo  (cyan, lightest)
 		vim.api.nvim_set_hl(0, "AlphaHeader7_2", { fg = "#68c5a8" }) -- V   (teal, lightest)
 		vim.api.nvim_set_hl(0, "AlphaHeader7_3", { fg = "#b4e4d6" }) -- imm (aqua, lightest)
-		vim.api.nvim_set_hl(0, "AlphaHeader8_0", { fg = "#233a52" }) -- Neo shadow (navy)
-		vim.api.nvim_set_hl(0, "AlphaHeader8_1", { fg = "#1f4a40" }) -- Vim shadow (dark teal)
+		vim.api.nvim_set_hl(0, "AlphaHeader8_0", { fg = "#233a52" }) -- N shadow (navy, matches N blue)
+		vim.api.nvim_set_hl(0, "AlphaHeader8_1", { fg = "#1f4d56" }) -- eo shadow (dark cyan, matches eo)
+		vim.api.nvim_set_hl(0, "AlphaHeader8_2", { fg = "#1f4a40" }) -- V shadow (dark teal, matches V)
+		vim.api.nvim_set_hl(0, "AlphaHeader8_3", { fg = "#2d6254" }) -- imm shadow (dark aqua, matches imm)
+
+		-- One Dark Pro themed dashboard text (non-logo elements)
+		vim.api.nvim_set_hl(0, "AlphaButton", { fg = "#61afef" })   -- menu labels (blue)
+		vim.api.nvim_set_hl(0, "AlphaShortcut", { fg = "#c678dd" }) -- shortcut keys (purple)
+		vim.api.nvim_set_hl(0, "AlphaFooter", { fg = "#e5c07b" })   -- footer (One Dark Pro yellow)
 
 		local utils = require("alpha.utils")
 
@@ -218,7 +227,16 @@ return {
 			-- dashboard.button('', ''),
 		}
 
-		dashboard.section.buttons.opts.hl = "AlphaHeader4_0" -- mid-blue; readable & decoupled from N's now-dark top step
+		-- NOTE: a group-level opts.hl does NOT propagate to child buttons in alpha
+		-- (groups only pass opts down when `inherit` is set). So highlight each button
+		-- directly: label/icon via opts.hl, shortcut key via opts.hl_shortcut.
+		for _, button in ipairs(dashboard.section.buttons.val) do
+			button.opts.hl = "AlphaButton" -- label + icon (One Dark Pro blue)
+			button.opts.hl_shortcut = "AlphaShortcut" -- shortcut key (purple)
+		end
+
+		-- Footer color (overrides the dashboard default orange "Number" group)
+		dashboard.section.footer.opts.hl = "AlphaFooter"
 		-- local function footer()
 		-- 	return "Footer Text"
 		-- end
