@@ -140,27 +140,27 @@ return {
 		-- Each letter keeps a per-line gradient (lines 11->17 lighten downward)
 		-- plus the two drop shadows, retuned to navy + dark teal.
 		vim.api.nvim_set_hl(0, "AlphaHeader0_0", { fg = "#a6dfcc" }) -- tittle (aqua accent)
-		vim.api.nvim_set_hl(0, "AlphaHeader1_0", { fg = "#4d92d4" }) -- N   (blue)
+		vim.api.nvim_set_hl(0, "AlphaHeader1_0", { fg = "#275ea2" }) -- N   (blue)
 		vim.api.nvim_set_hl(0, "AlphaHeader1_1", { fg = "#2b6356" }) -- V   (teal)
 		vim.api.nvim_set_hl(0, "AlphaHeader1_2", { fg = "#a6dfcc" }) -- imm (aqua, top edge)
-		vim.api.nvim_set_hl(0, "AlphaHeader2_0", { fg = "#5398d8" }) -- N   (blue)
+		vim.api.nvim_set_hl(0, "AlphaHeader2_0", { fg = "#336daf" }) -- N   (blue)
 		vim.api.nvim_set_hl(0, "AlphaHeader2_1", { fg = "#357364" }) -- V   (teal)
-		vim.api.nvim_set_hl(0, "AlphaHeader3_0", { fg = "#589fdd" }) -- N   (blue)
+		vim.api.nvim_set_hl(0, "AlphaHeader3_0", { fg = "#3f7cbb" }) -- N   (blue)
 		vim.api.nvim_set_hl(0, "AlphaHeader3_1", { fg = "#233a52" }) -- shadow (navy)
 		vim.api.nvim_set_hl(0, "AlphaHeader3_2", { fg = "#5fbecb" }) -- eo  (cyan)
 		vim.api.nvim_set_hl(0, "AlphaHeader3_3", { fg = "#3f8471" }) -- V   (teal)
 		vim.api.nvim_set_hl(0, "AlphaHeader3_4", { fg = "#84ceb8" }) -- imm (aqua)
-		vim.api.nvim_set_hl(0, "AlphaHeader4_0", { fg = "#5ea5e1" }) -- N   (blue)
+		vim.api.nvim_set_hl(0, "AlphaHeader4_0", { fg = "#4b8bc8" }) -- N   (blue)
 		vim.api.nvim_set_hl(0, "AlphaHeader4_1", { fg = "#68c4d0" }) -- eo  (cyan)
 		vim.api.nvim_set_hl(0, "AlphaHeader4_2", { fg = "#4a947f" }) -- V   (teal)
 		vim.api.nvim_set_hl(0, "AlphaHeader4_3", { fg = "#90d4c0" }) -- imm (aqua)
-		vim.api.nvim_set_hl(0, "AlphaHeader5_0", { fg = "#63abe5" }) -- N   (blue)
+		vim.api.nvim_set_hl(0, "AlphaHeader5_0", { fg = "#569ad5" }) -- N   (blue)
 		vim.api.nvim_set_hl(0, "AlphaHeader5_1", { fg = "#72cad5" }) -- eo  (cyan)
 		vim.api.nvim_set_hl(0, "AlphaHeader5_2", { fg = "#233a52" }) -- shadow (navy)
 		vim.api.nvim_set_hl(0, "AlphaHeader5_3", { fg = "#72cad5" }) -- eo  (cyan)
 		vim.api.nvim_set_hl(0, "AlphaHeader5_4", { fg = "#54a48d" }) -- V   (teal)
 		vim.api.nvim_set_hl(0, "AlphaHeader5_5", { fg = "#9cd9c7" }) -- imm (aqua)
-		vim.api.nvim_set_hl(0, "AlphaHeader6_0", { fg = "#69b2ea" }) -- N   (blue)
+		vim.api.nvim_set_hl(0, "AlphaHeader6_0", { fg = "#62a9e1" }) -- N   (blue)
 		vim.api.nvim_set_hl(0, "AlphaHeader6_1", { fg = "#7bd0da" }) -- eo  (cyan)
 		vim.api.nvim_set_hl(0, "AlphaHeader6_2", { fg = "#5eb59a" }) -- V   (teal)
 		vim.api.nvim_set_hl(0, "AlphaHeader6_3", { fg = "#a8dfcf" }) -- imm (aqua)
@@ -218,7 +218,7 @@ return {
 			-- dashboard.button('', ''),
 		}
 
-		dashboard.section.buttons.opts.hl = "AlphaHeader1_0"
+		dashboard.section.buttons.opts.hl = "AlphaHeader4_0" -- mid-blue; readable & decoupled from N's now-dark top step
 		-- local function footer()
 		-- 	return "Footer Text"
 		-- end
