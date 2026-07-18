@@ -54,5 +54,13 @@ return {
     vim.keymap.set('n', '<leader>sn', function()
       builtin.find_files { cwd = vim.fn.stdpath 'config' }
     end, { desc = '[S]earch [N]eovim files' })
+
+    -- Git pickers. In-picker defaults (from telescope docs, not overridden):
+    --   git_status:   <Tab> stage/unstage selected file, <CR> open it
+    --   git_commits:  <CR> checks out commit, <C-r>m/s/h reset mixed/soft/hard
+    --   git_bcommits: <CR> checks out, <C-v>/<C-x>/<C-t> diff in vsplit/hsplit/tab
+    vim.keymap.set('n', '<leader>gs', builtin.git_status, { desc = '[G]it [S]tatus (changed files)' })
+    vim.keymap.set('n', '<leader>gc', builtin.git_commits, { desc = '[G]it [C]ommits' })
+    vim.keymap.set('n', '<leader>gC', builtin.git_bcommits, { desc = '[G]it buffer [C]ommits' })
   end,
 }
