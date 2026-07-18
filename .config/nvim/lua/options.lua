@@ -8,6 +8,7 @@ end)
 
 vim.o.breakindent = true
 vim.o.undofile = true
+vim.o.autoread = true
 
 vim.o.ignorecase = true
 vim.o.smartcase = true
