@@ -18,6 +18,8 @@ return {
       'saghen/blink.cmp',
     },
     config = function()
+      vim.filetype.add { extension = { tf = 'terraform', tfvars = 'terraform-vars' } }
+
       vim.api.nvim_create_autocmd('LspAttach', {
         group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
         callback = function(event)
@@ -104,6 +106,7 @@ return {
 
       local capabilities = require('blink.cmp').get_lsp_capabilities()
       local servers = {
+        terraformls = {},
         lua_ls = {
           settings = {
             Lua = {
@@ -119,17 +122,15 @@ return {
       vim.list_extend(ensure_installed, { 'stylua' })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
-      require('mason-lspconfig').setup {
-        ensure_installed = {},
-        automatic_installation = false,
-        handlers = {
-          function(server_name)
-            local server = servers[server_name] or {}
-            server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
-            require('lspconfig')[server_name].setup(server)
-          end,
-        },
-      }
+      for server_name, server in pairs(servers) do
+        server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
+        vim.lsp.config(server_name, server)
+      end
+
+      vim.lsp.config('sourcekit', { capabilities = capabilities, filetypes = { 'swift' } })
+      vim.lsp.enable 'sourcekit'
+
+      require('mason-lspconfig').setup {}
     end,
   },
 }

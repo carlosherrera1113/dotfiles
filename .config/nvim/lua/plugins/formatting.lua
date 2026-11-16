@@ -15,7 +15,7 @@ return {
   opts = {
     notify_on_error = false,
     format_on_save = function(bufnr)
-      local disable_filetypes = { c = true, cpp = true }
+      local disable_filetypes = { c = true, cpp = true, swift = true }
       if disable_filetypes[vim.bo[bufnr].filetype] then
         return nil
       end
@@ -26,6 +26,8 @@ return {
     end,
     formatters_by_ft = {
       lua = { 'stylua' },
+      terraform = { 'terraform_fmt' },
+      ['terraform-vars'] = { 'terraform_fmt' },
     },
   },
 }
